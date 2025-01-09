@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What time is it right now?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    #clock {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    #timezone {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>What time is it right now?</h1>
+  <div id="clock">Loading...</div>
+  <button onclick="getTimeAndTimezone()">Show Time & Timezone</button>
+  <div id="timezone"></div>
+
+  <script>
+    // Function to display the current time
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Function to show time and timezone when the button is clicked
+    function getTimeAndTimezone() {
+      const now = new Date();
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const time = now.toLocaleString();
+
+      document.getElementById('timezone').innerText = `Time: ${time}\nTimezone: ${timezone}`;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
